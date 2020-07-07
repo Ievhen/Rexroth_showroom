@@ -1,5 +1,6 @@
 # This class represents the product
 
+
 class Box:
 
     def __init__(self, box_id, path):
@@ -86,3 +87,17 @@ class Box:
 
     def wait_nexo_button(self):
         pass
+
+    # setters
+    def set_box_id(self, id):
+        self.box_id = id
+
+    def set_path(self, path):
+        self.path = path
+
+    # getters        
+    def get_box_id(self):
+        return self.box_id
+
+    def get_path(self):
+        return self.path
