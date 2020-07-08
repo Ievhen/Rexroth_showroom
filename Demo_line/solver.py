@@ -1,15 +1,22 @@
 # Startup script
-from Demo_line.box import Box
 from Demo_line.section import Section
+from Demo_line.sql_tools import *
 
-SECTION_NUM = 14
 
-box1 = Box()
+class Solver:
 
-section = []
-for i in range(SECTION_NUM):
-    section.append(Section())
+    def __init__(self):
+        self.db = db_connect('localhost', 'root', 'shyrokoa', 'showroom_database')
+        self.SECTION_NUM = 14
+        self.section = []
+        self.run()
 
-section[12].set_max_pallete_num(4)
+    def run(self):
+        for i in range(self.SECTION_NUM):
+            self.section.append(Section())
+        self.section[12].set_max_pallete_num(4)
+        print(self.section[12].get_max_pallete_num())
 
-print(section[12].get_max_pallete_num())
+
+# Main
+solver = Solver()
