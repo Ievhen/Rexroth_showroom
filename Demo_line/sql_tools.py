@@ -21,3 +21,7 @@ def request(command, column, table, where_arg=None):
         return f'{command} {column} FROM {table} WHERE {where_arg}'
     else:
         return f'{command} {column} FROM {table}'
+
+
+def close(db):
+    db.close()

@@ -10,6 +10,7 @@ class Solver:
         self.SECTION_NUM = 14
         self.section = []
         self.run()
+        close(self.db)
 
     def run(self):
         for i in range(self.SECTION_NUM):
