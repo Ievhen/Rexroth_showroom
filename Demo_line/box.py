@@ -1,6 +1,4 @@
 # This class represents the product
-
-
 class Box:
 
     def __init__(self, box_id, path):
