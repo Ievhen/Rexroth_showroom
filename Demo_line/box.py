@@ -1,92 +1,40 @@
 # This class represents the product
 
 
+from Demo_line.functions import *
+
 class Box:
 
     def __init__(self, box_id, path):
         self.box_id = box_id
         self.path = path
-        self.run()
 
-    def run(self):
-        self.process1(0)  # pop from portal
-        self.process2()  # delta
-        self.process3()  # bufor s3
-        self.process4()  # APAS
-        self.process5()  # feader
-        self.process6()  # emc
+    def run(self, section):
+        process1(section)  # pop from portal
+        check_and_pass(section)
+        process2()  # delta
+        process3()  # bufor s3
+        process4()  # APAS
+        process5()  # feader
+        process6()  # emc
 
         if self.path == 0:  # without NEXO
-            self.lift_enter_switch()
-            self.process7()  # cartesian
-            self.lift_exit_switch()
+            lift_enter_switch()
+            process7()  # cartesian
+            lift_exit_switch()
         else:
-            self.lift_enter_switch()
-            self.process8()  # bufor s8
-            self.wait_nexo_button()
-            self.process9()  # NEXO
-            self.wait_nexo_button()
-            self.process10()  # bufor s10
-            self.lift_exit_switch()
-        self.process11()  # bufor s11
-        self.process12()  # grawer
-        self.process13()  # BIG bufor s13
-        self.process14()  # buffor s14
-        self.process1(1)
-
-    def process1(self, path):
-        if path == 0:
-            pass
-        elif path == 1:
-            pass
-
-    def process2(self):
-        pass
-
-    def process3(self):
-        pass
-
-    def process4(self):
-        pass
-
-    def process5(self):
-        pass
-
-    def process6(self):
-        pass
-
-    def process7(self):
-        pass
-
-    def process8(self):
-        pass
-
-    def process9(self):
-        pass
-
-    def process10(self):
-        pass
-
-    def process11(self):
-        pass
-
-    def process12(self):
-        pass
-
-    def process13(self):
-        pass
-
-    def process14(self):
-        pass
-
-    def lift_enter_switch(self):
-        pass
-
-    def lift_exit_switch(self):
-        pass
-
-    def wait_nexo_button(self):
-        pass
+            lift_enter_switch()
+            process8()  # bufor s8
+            wait_nexo_button()
+            process9()  # NEXO
+            wait_nexo_button()
+            process10()  # bufor s10
+            lift_exit_switch()
+        process11()  # bufor s11
+        process12()  # grawer
+        process13()  # BIG bufor s13
+        process14()  # buffor s14
+        process1(1)
 
     # setters
     def set_box_id(self, id):
@@ -95,7 +43,7 @@ class Box:
     def set_path(self, path):
         self.path = path
 
-    # getters        
+    # getters
     def get_box_id(self):
         return self.box_id
 
