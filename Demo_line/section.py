@@ -1,6 +1,5 @@
 # This class describing the section of the transport conveyor
 # Each section is defined by a stop gates
-
 class Section:
 
     def __init__(self, num=1):

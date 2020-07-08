@@ -1,7 +1,6 @@
 # Startup script
-
-from IL_Program.box import Box
-from IL_Program.section import Section
+from Demo_line.box import Box
+from Demo_line.section import Section
 
 SECTION_NUM = 14
 
