@@ -1,9 +1,14 @@
 # This class represents the product
+from Demo_line.sql_tools import db_connect
+
+
 class Box:
 
     def __init__(self, box_id, path):
         self.box_id = box_id
         self.path = path
+        # TODO enter real parameters to db_connect()
+        self.database = db_connect()
         self.run()
 
     def run(self):
