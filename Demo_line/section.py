@@ -1,11 +1,14 @@
 # This class describing the section of the transport conveyor
 # Each section is defined by a stop gates
+
+
 class Section:
 
-    def __init__(self, num=1):
-        self.MAX_PALLETS_NUM = num
+    def __init__(self, stop_gate, num=1):
+        self.max_pallets_num = num
         self.status = 'IDLE'
         self.counter = 0
+        self.stop_gate = stop_gate
 
     def counter_increase(self):
         self.counter += 1
@@ -14,7 +17,7 @@ class Section:
         self.counter += 1
 
     def set_max_pallets_num(self, num):
-        self.MAX_PALLETS_NUM = num
+        self.max_pallets_num = num
 
     def set_status(self, status):
         self.status = status
@@ -23,10 +26,13 @@ class Section:
         self.counter = counter
 
     def get_max_pallets_num(self):
-        return self.MAX_PALLETS_NUM
+        return self.max_pallets_num
 
     def get_status(self):
         return self.status
 
     def get_counter(self):
         return self.counter
+
+    def get_stop_gate(self):
+        return self.stop_gate
