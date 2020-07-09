@@ -14,7 +14,7 @@ class Section:
         self.counter += 1
 
     def counter_decrease(self):
-        self.counter += 1
+        self.counter -= 1
 
     def set_max_pallets_num(self, num):
         self.max_pallets_num = num
