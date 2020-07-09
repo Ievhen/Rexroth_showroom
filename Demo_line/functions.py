@@ -1,5 +1,7 @@
 # A set of functions
-# from Demo_line.sql_tool
+from Demo_line.sql_tools import *
+
+# SQL requests
 
 
 def check_status(section_id):
@@ -7,7 +9,7 @@ def check_status(section_id):
 
 
 # transfer the signal to Master or/and DB
-# WE are using TIMER and COIL to serve the signal
+# we are using TIMER and COIL to serve the signal
 def pass_unit(stop_gate):
     pass
 
@@ -21,8 +23,8 @@ def read_rfid():
 
 
 # transfer the signal to Master or/and DB
-# WE are using local state machine on Slave
-# Program 0 - pop the box, 1 - push the box.
+# we are using local state machine on Slave
+# program 0 - pop the box, 1 - push the box.
 def run_portal(prog):
     pass
 
@@ -73,57 +75,89 @@ def be_ready_to_switch(path, lift_id):
             pass  # go from buffer after the Nexo
 
 
+def get_nexo_button():
+    pass
+
 # Processes logic
 
 
 # PORTAL
 def process1(section, prog=0):
-    if section[0].get_status() == 'BUSY':
-        write_rfid(1)
-        run_portal(prog)
+    while True:
+        if section[0].get_status() == 'BUSY':
+            break
+        else:
+            pass  # time.sleep(0.1) # 100ms
+    write_rfid(1)
+    run_portal(prog)
 
 
+# Release pallet when conditions met
 def check_and_pass(section, start, end):
-    if section[start].get_status() == 'DONE' and section[end].get_status() == 'IDLE':
-        section[end].set_status('WAIT')
-        pass_unit(section[start].get_stop_gate())
+    while True:
+        if section[start].get_status() == 'DONE' and section[end].get_status() == 'IDLE':
+            break
+        else:
+            pass
+    section[end].set_status('WAIT')
+    pass_unit(section[start].get_stop_gate())
 
 
 # DELTA
 def process2(section, prog=0):
-    if section[1].get_status() == 'BUSY':
-        read_rfid(2)
-        run_delta(prog)
+    while True:
+        if section[1].get_status() == 'BUSY':
+            break
+        else:
+            pass
+    read_rfid(2)
+    run_delta(prog)
 
 
 # BUFFER S3 before the APAS
 def process3(section):
-    if section[2].get_status() == 'BUSY':
-        empty_prog()
+    while True:
+        if section[2].get_status() == 'BUSY':
+            break
+        else:
+            pass
+    empty_prog()
 
 
 # APAS
 def process4(section, prog=0):
-    if section[3].get_status() == 'BUSY':
-        read_rfid(3)
-        run_apas(prog)
+    while True:
+        if section[3].get_status() == 'BUSY':
+            break
+        else:
+            pass
+    read_rfid(3)
+    run_apas(prog)
 
 
 # FEEDER
 def process5(section, prog=0):
-    if section[4].get_status() == 'BUSY':
-        read_rfid(4)
-        run_feeder(prog)
+    while True:
+        if section[4].get_status() == 'BUSY':
+            break
+        else:
+            pass
+    read_rfid(4)
+    run_feeder(prog)
 
 
 # EMC PRESS
 def process6(section, prog=0):
-    if section[5].get_status() == 'BUSY':
-        read_rfid(5)
-        run_emc(prog)
+    while True:
+        if section[5].get_status() == 'BUSY':
+            break
+        else:
+            pass
+    read_rfid(5)
+    run_emc(prog)
 
 
-#
+# RAILROAD SWITCH for lift L3
 def lift_enter_switch(section, path):
     if path:
         section[6].set_satus('WAIT')
@@ -134,6 +168,7 @@ def lift_enter_switch(section, path):
     pass_unit('S6')
 
 
+# RAILROAD SWITCH for lift L4
 def lift_exit_switch(section, path):
     if path:
         section[10].set_satus('WAIT')
@@ -147,58 +182,100 @@ def lift_exit_switch(section, path):
 
 # CARTESIAN
 def process7(section, prog=0):
-    if section[6].get_status() == 'BUSY':
-        read_rfid(6)
-        run_cartesian(prog)
+    while True:
+        if section[6].get_status() == 'BUSY':
+            break
+        else:
+            pass
+    read_rfid(6)
+    run_cartesian(prog)
 
 
 # BUFFER S8 before the NEXO
 def process8(section):
-    if section[7].get_status() == 'BUSY':
-        empty_prog()
+    while True:
+        if section[7].get_status() == 'BUSY':
+            break
+        else:
+            pass
+    empty_prog()
 
 
+# Check two-handed push-button system
 def wait_nexo_button():
-    pass
-    # while get_nexo_button() == False:
-    #    time.sleep(0.1) # 100ms
+    while True:
+        if get_nexo_button() == True:
+            break
+        else:
+            pass
 
 
 # NEXO
 def process9(section, prog=0):
-    if section[8].get_status() == 'BUSY':
-        read_rfid(7)
-        run_nexo(prog)
+    while True:
+        if section[8].get_status() == 'BUSY':
+            break
+        else:
+            pass
+    read_rfid(7)
+    run_nexo(prog)
 
 
 # BUFFER S10 after the NEXO
 def process10(section):
-    if section[9].get_status() == 'BUSY':
-        empty_prog()
+    while True:
+        if section[9].get_status() == 'BUSY':
+            break
+        else:
+            pass
+    empty_prog()
 
 
 # BUFFER S11 after the NEXO
 def process11(section):
-    if section[10].get_status() == 'BUSY':
-        empty_prog()
+    while True:
+        if section[10].get_status() == 'BUSY':
+            break
+        else:
+            pass
+    empty_prog()
 
 
 # ENGRAVER
 def process12(section, prog=0):
-    if section[11].get_status() == 'BUSY':
-        read_rfid(8)
-        run_engraver(prog)
+    while True:
+        if section[11].get_status() == 'BUSY':
+            break
+        else:
+            pass
+    read_rfid(8)
+    run_engraver(prog)
+    while True:
+        if section[11].get_status() == 'DONE' and section[12].get_counter() < section[12].get_max_pallets_num():
+            break
+        else:
+            pass
+    section[12].counter_increase()
+    pass_unit('S12')
 
 
 # BIG BUFFER S13
 def process13(section):
-    if section[12].get_counter() > 0 and section[13].get_status() == 'IDLE':
-        section[13].set_satus('WAIT')
-        section[12].counter_decrease()
-        pass_unit('S13')
+    while True:
+        if section[12].get_counter() > 0 and section[13].get_status() == 'IDLE':
+            break
+        else:
+            pass
+    section[13].set_satus('WAIT')
+    section[12].counter_decrease()
+    pass_unit('S13')
 
 
 # BUFFER S14 before the PORTAL
 def process14(section):
-    if section[13].get_status() == 'BUSY':
-        empty_prog()
+    while True:
+        if section[13].get_status() == 'BUSY':
+            break
+        else:
+            pass
+    empty_prog()

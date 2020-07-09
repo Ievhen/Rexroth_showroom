@@ -42,7 +42,6 @@ class Box:
         process11(section)  # buffer s11
         check_and_pass(section, 10, 11)
         process12(section)  # engraver
-        check_and_pass(section, 11, 12)
         process13(section)  # big buffer s13
         process14(section)  # buffer s14
         check_and_pass(section, 13, 0)
