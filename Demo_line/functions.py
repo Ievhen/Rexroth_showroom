@@ -1,13 +1,15 @@
 # A set of functions
-# from Demo_line.sql_tool
+from Demo_line.sql_tools import *
 
 
-def check_status(section_id):
-    pass
+# return the list of current sections status for certain product line
+def check_status(db, line_id):
+    req = request('SELECT', '*', 'section_status', where_arg=f'pl_id={line_id}')
+    return execute_request(db, req)[0][1:]
 
 
 # transfer the signal to Master or/and DB
-# WE are using TIMER and COIL to serve the signal
+# we are using TIMER and COIL to serve the signal
 
 def pass_unit(stop_gate):
     pass
