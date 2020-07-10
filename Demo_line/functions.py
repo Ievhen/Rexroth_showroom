@@ -2,17 +2,19 @@
 from Demo_line.sql_tools import *
 
 
-# return the list of current sections status for certain product line
-def check_status(db, line_id):
-    req = request('SELECT', '*', 'section_status', where_arg=f'pl_id={line_id}')
+# function returns the list of current sections status for certain product line
+def check_status(db):
+    req = request('SELECT', '*', 'section_status', where_arg=f'pl_id={1}')
     return execute_request(db, req)[0][1:]
 
 
 # transfer the signal to Master or/and DB
 # we are using TIMER and COIL to serve the signal
 
-def pass_unit(stop_gate):
-    pass
+# function sets the specific ts_request bit on 1
+def pass_unit(db, stop_gate):
+    sql = f"UPDATE showroom_database.ts_request SET {stop_gate} = 1 where pl_id = 1"
+    update_request(db, sql)
 
 
 def write_rfid():
@@ -82,7 +84,7 @@ def be_ready_to_switch(path, lift_id):
 # PORTAL
 def process1(section, prog=0):
     if section[0].get_status() == 'BUSY':
-        write_rfid(1)
+        write_rfid()
         run_portal(prog)
 
 
