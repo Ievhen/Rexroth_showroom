@@ -88,10 +88,10 @@ def process1(section, prog=0):
         run_portal(prog)
 
 
-def check_and_pass(section, start, end):
+def check_and_pass(db, section, start, end):
     if section[start].get_status() == 'DONE' and section[end].get_status() == 'IDLE':
         section[end].set_status('WAIT')
-        pass_unit(section[start].get_stop_gate())
+        pass_unit(db, section[start].get_stop_gate())
 
 
 def process2():
