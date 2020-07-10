@@ -1,17 +1,23 @@
 # A set of functions
 from Demo_line.sql_tools import *
 
-# SQL requests
 
 
-def check_status(section_id):
-    pass
+# function returns the list of current sections status for certain product line
+def check_status(db):
+    req = request('SELECT', '*', 'section_status', where_arg=f'pl_id={1}')
+    return execute_request(db, req)[0][1:]
 
 
 # transfer the signal to Master or/and DB
 # we are using TIMER and COIL to serve the signal
-def pass_unit(stop_gate):
-    pass
+
+
+# function sets the specific ts_request bit on 1
+def pass_unit(db, stop_gate):
+    sql = f"UPDATE showroom_database.ts_request SET {stop_gate} = 1 where pl_id = 1"
+    update_request(db, sql)
+
 
 
 def write_rfid():
@@ -75,6 +81,23 @@ def be_ready_to_switch(path, lift_id):
             pass  # go from buffer after the Nexo
 
 
+
+# Processes logic
+# PORTAL
+def process1(section, prog=0):
+    if section[0].get_status() == 'BUSY':
+        write_rfid()
+        run_portal(prog)
+
+
+def check_and_pass(db, section, start, end):
+    if section[start].get_status() == 'DONE' and section[end].get_status() == 'IDLE':
+        section[end].set_status('WAIT')
+        pass_unit(db, section[start].get_stop_gate())
+
+
+def process2():
+    pass
 def get_nexo_button():
     pass
 
